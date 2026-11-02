@@ -1,0 +1,48 @@
+appId: com.macchromakey.app
+productName: 苹果手机透明视频生成器
+directories:
+  buildResources: build
+  output: dist
+# Allowlist: never ship local media, tests, credentials or project sources.
+files:
+  - out/**
+  - package.json
+  - '!out/**/*.map'
+asar: true
+extraResources:
+  - from: resources/bin
+    to: bin
+    filter:
+      - ffmpeg
+      - ffprobe
+      - '${arch}/ffmpeg'
+      - '${arch}/ffprobe'
+mac:
+  icon: build/chroma-icon.icns
+  # Keep the bundle/executable filename stable; productName supplies its Chinese display name.
+  executableName: MacChromaKey
+  category: public.app-category.video
+  minimumSystemVersion: '13.0'
+  target:
+    - target: dmg
+      arch:
+        - arm64
+        - x64
+  artifactName: '${productName}-${version}-${arch}.${ext}'
+  # Local distribution; no Developer ID credentials are required.
+  identity: '-'
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: false
+dmg:
+  artifactName: '${productName}-${version}-${arch}.${ext}'
+  title: '${productName} ${version} (${arch})'
+  contents:
+    - x: 150
+      y: 160
+    - x: 430
+      y: 160
+      type: link
+      path: /Applications
+npmRebuild: false

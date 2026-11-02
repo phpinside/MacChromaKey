@@ -1,0 +1,68 @@
+{
+  "name": "macchromakey",
+  "version": "1.0.0",
+  "productName": "苹果手机透明视频生成器",
+  "description": "在 Mac 上将绿幕视频制作成适用于苹果设备兼容播放器的透明背景视频动画",
+  "author": "denggao <phpinside@qq.com>",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phpinside/MacChromaKey.git"
+  },
+  "homepage": "https://github.com/phpinside/MacChromaKey#readme",
+  "bugs": {
+    "url": "https://github.com/phpinside/MacChromaKey/issues"
+  },
+  "main": "./out/main/index.js",
+  "scripts": {
+    "build:icons": "node scripts/build-icons.cjs",
+    "format": "prettier --write .",
+    "lint": "eslint --cache .",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "postinstall": "install-electron && electron-builder install-app-deps",
+    "build:unpack": "npm run build && electron-builder --mac --dir --publish never",
+    "build:mac": "npm run build && electron-builder --mac dmg --arm64 --x64 --publish never",
+    "test:smoke": "npm run build && electron scripts/smoke.cjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:pipeline": "tsx scripts/test-pipeline.ts",
+    "build:mac:arm64": "npm run build && electron-builder --mac dmg --arm64 --publish never",
+    "build:mac:x64": "npm run build && electron-builder --mac dmg --x64 --publish never",
+    "test:package": "node scripts/verify-package.cjs"
+  },
+  "dependencies": {
+    "@electron-toolkit/utils": "^4.0.0",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@electron-toolkit/eslint-config-prettier": "^3.0.1",
+    "@electron-toolkit/eslint-config-ts": "^3.1.0",
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^6.0.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "prettier": "^3.9.10",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4",
+    "vitest": "^4.1.12"
+  },
+  "private": true
+}

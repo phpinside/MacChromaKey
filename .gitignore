@@ -1,0 +1,11 @@
+node_modules
+dist
+out
+.DS_Store
+.eslintcache
+*.log*
+
+# 本地测试素材（自备绿幕视频，不随仓库分发）
+input.mp4
+*.mov
+.zcode/
